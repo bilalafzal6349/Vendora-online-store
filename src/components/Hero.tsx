@@ -80,12 +80,13 @@ const Hero: React.FC<HeroProps> = ({ onShopNow, onViewCategories }) => {
           </div>
 
           {/* Hero Image */}
+
           <div className="relative animate-fadeInRight">
-            <div className="bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-600 rounded-3xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-700 shadow-2xl">
+            <div className="bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-600 rounded-3xl p-8 transform rotate-unset md:rotate-3 hover:rotate-0 transition-transform duration-700 shadow-2xl">
               <img
                 src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Shopping"
-                className="w-full h-96 object-cover rounded-2xl shadow-2xl"
+                className="w-full h-44 sm:h-60 md:h-96 object-cover rounded-2xl shadow-2xl"
               />
             </div>
 
@@ -109,6 +110,9 @@ const Hero: React.FC<HeroProps> = ({ onShopNow, onViewCategories }) => {
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            <h1>this is hover text</h1>
           </div>
         </div>
       </div>
