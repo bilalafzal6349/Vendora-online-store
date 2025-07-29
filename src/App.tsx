@@ -13,6 +13,8 @@ import { CartItem, Product } from "././types";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./context/CartContext";
+import { ChatProvider } from "./context/ChatContext";
+import { ChatBot } from "./components/ChatBot";
 // import Checkout from "./pages/Checkout";
 
 const DUMMY_PRODUCTS: Product[] = [
@@ -282,32 +284,35 @@ function App() {
   return (
     <Router>
       <CartProvider>
-        <div className="min-h-screen bg-gray-50">
-          <Toaster position="top-center" />
-          <Header
-            cartItemsCount={getCartItemsCount()}
-            onCartClick={() => setIsCartOpen(true)}
-            searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
-            onNavigate={handleNavigation}
-            currentPage={currentPage}
-          />
+        <ChatProvider>
+          <div className="min-h-screen bg-gray-50">
+            <Toaster position="top-center" />
+            <Header
+              cartItemsCount={getCartItemsCount()}
+              onCartClick={() => setIsCartOpen(true)}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              onNavigate={handleNavigation}
+              currentPage={currentPage}
+            />
 
-          {renderCurrentPage()}
+            {renderCurrentPage()}
 
-          <Footer onNavigate={handleNavigation} />
+            <Footer onNavigate={handleNavigation} />
 
-          <Cart
-            isOpen={isCartOpen}
-            onClose={() => setIsCartOpen(false)}
-            items={cartItems}
-            onUpdateQuantity={updateQuantity}
-            onRemoveItem={removeFromCart}
-            total={getCartTotal()}
-          />
+            <Cart
+              isOpen={isCartOpen}
+              onClose={() => setIsCartOpen(false)}
+              items={cartItems}
+              onUpdateQuantity={updateQuantity}
+              onRemoveItem={removeFromCart}
+              total={getCartTotal()}
+            />
 
-          <WhatsAppButton />
-        </div>
+            <WhatsAppButton />
+            <ChatBot />
+          </div>
+        </ChatProvider>
       </CartProvider>
     </Router>
   );

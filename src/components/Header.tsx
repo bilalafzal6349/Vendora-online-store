@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search, ShoppingBag, Menu, Store, X } from "lucide-react";
+import { Search, ShoppingBag, Menu, X } from "lucide-react";
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-40 border-b border-gray-100">
+    <header className="bg-[#EDF9FA] shadow-lg sticky top-0 z-40 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -52,12 +52,12 @@ const Header: React.FC<HeaderProps> = ({
             className="flex items-center space-x-4 cursor-pointer group"
             onClick={() => handleNavClick("home")}
           >
-            <div className="bg-gradient-to-br from-emerald-600 to-emerald-800 p-3 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
-              <Store className="h-7 w-7 text-white" />
+            <div className=" transition-all duration-300 transform  ">
+              <img src="/c.jpeg" className="h-12 w-12  " />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
-                Layyah
+              <h1 className="text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors capitalize">
+                VENDORA
               </h1>
               <p className="text-sm text-emerald-600 font-semibold -mt-1">
                 OnlineStore

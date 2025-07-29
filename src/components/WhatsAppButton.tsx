@@ -1,5 +1,5 @@
 import React from "react";
-import { MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppButton: React.FC = () => {
   const handleWhatsAppClick = () => {
@@ -14,10 +14,10 @@ const WhatsAppButton: React.FC = () => {
   return (
     <button
       onClick={handleWhatsAppClick}
-      className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 z-40 animate-bounce"
+      className="fixed bottom-6 right-6 hover:bg-green-100 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 z-40 animate-bounce"
       title="Contact us on WhatsApp"
     >
-      <MessageCircle className="h-6 w-6" />
+      <FaWhatsapp className="h-5 w-5 sm:h-6 sm:w-6 text-green-500" />
     </button>
   );
 };

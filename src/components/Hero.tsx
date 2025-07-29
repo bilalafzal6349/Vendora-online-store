@@ -86,33 +86,38 @@ const Hero: React.FC<HeroProps> = ({ onShopNow, onViewCategories }) => {
               <img
                 src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Shopping"
-                className="w-full h-44 sm:h-60 md:h-96 object-cover rounded-2xl shadow-2xl"
+                className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />
             </div>
 
             {/* Floating Cards */}
-            <div className="absolute -top-6 -left-6 bg-white p-6 rounded-2xl shadow-2xl animate-float">
-              <div className="flex items-center space-x-3">
-                <ShoppingBag className="h-8 w-8 text-emerald-600" />
+            <div className="absolute -top-6 -left-6 bg-white p-2 md:p-6 rounded-2xl shadow-2xl animate-float ">
+              <div className="flex items-center space-x-3 ">
+                <ShoppingBag className="  h-3 w-3  md:h-8 md:w-8 text-emerald-600" />
                 <div>
-                  <p className="font-bold text-gray-900 text-lg">1000+</p>
-                  <p className="text-sm text-gray-600">Products</p>
+                  <p className="font-bold text-gray-900 text-sm md:text-lg">
+                    1000+
+                  </p>
+                  <p className=" text-[10px] md:text-sm text-gray-600">
+                    Products
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-2xl animate-float-delayed">
+            <div className="absolute -bottom-6 -right4 md:-right-6 bg-white p-2 md:p-6 rounded-2xl shadow-2xl animate-float-delayed">
               <div className="flex items-center space-x-3">
-                <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                <div className=" w-2  h2 md:w-4 md:h-4 bg-green-500 rounded-full animate-pulse"></div>
                 <div>
-                  <p className="font-bold text-gray-900 text-lg">Fast</p>
-                  <p className="text-sm text-gray-600">Delivery</p>
+                  <p className="font-bold text-gray-900 text-sm md:text-lg">
+                    Fast
+                  </p>
+                  <p className=" text-[10px] md:text-sm text-gray-600">
+                    Delivery
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-          <div>
-            <h1>this is hover text</h1>
           </div>
         </div>
       </div>

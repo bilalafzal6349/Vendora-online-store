@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Store,
   Phone,
   Mail,
   MapPin,
@@ -35,15 +34,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Brand */}
           <div className="space-y-6">
             <div
-              className="flex items-center space-x-3 cursor-pointer group"
+              className="flex items-center space-x-3 cursor-pointer p-3 group"
               onClick={() => handleNavClick("home")}
             >
-              <div className="bg-gradient-to-br from-emerald-600 to-emerald-800 p-3 rounded-xl group-hover:shadow-xl transition-all duration-300">
-                <Store className="h-7 w-7 text-white" />
+              <div className=" transition-all duration-300">
+                <img src="/c.jpeg" className="w-[52px] h-[52px]" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold group-hover:text-emerald-400 transition-colors">
-                  Layyah
+                <h1 className="text-2xl font-bold group-hover:text-emerald-400 transition-colors capitalize">
+                  VENDORA
                 </h1>
                 <p className="text-sm text-emerald-400 font-semibold -mt-1">
                   OnlineStore
@@ -184,13 +183,13 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <div className="flex items-center space-x-3 group">
                 <Mail className="h-5 w-5 text-emerald-400 group-hover:scale-110 transition-transform" />
                 <span className="text-gray-400 group-hover:text-white transition-colors">
-                  info@layyahstore.com
+                  info@Vendorastore.com
                 </span>
               </div>
               <div className="flex items-center space-x-3 group">
                 <MapPin className="h-5 w-5 text-emerald-400 group-hover:scale-110 transition-transform" />
                 <span className="text-gray-400 group-hover:text-white transition-colors">
-                  Layyah, Punjab, Pakistan
+                  Punjab, Pakistan
                 </span>
               </div>
             </div>
@@ -200,9 +199,12 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 Layyah OnlineStore. All rights reserved. | Designed with ❤️
-            for our customers
+            © 2025 Vendora OnlineStore. All rights reserved. | Where care meets
+            convenience — every product, every time.
           </p>
+          <span>
+            developed by <strong>Avengers</strong>{" "}
+          </span>
         </div>
       </div>
     </footer>
