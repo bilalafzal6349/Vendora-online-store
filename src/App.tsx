@@ -10,11 +10,12 @@ import WhatsAppButton from "././components/WhatsAppButton";
 import About from "././components/About";
 import Contact from "././components/Contact";
 import { CartItem, Product } from "././types";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./context/CartContext";
 import { ChatProvider } from "./context/ChatContext";
 import { ChatBot } from "./components/ChatBot";
+import { SignIn, SignUp, SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 // import Checkout from "./pages/Checkout";
 
 const DUMMY_PRODUCTS: Product[] = [
@@ -175,12 +176,71 @@ const DUMMY_PRODUCTS: Product[] = [
   },
 ];
 
+// Component for the main home page content
+const HomePage = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchQuery] = useState("");
+
+  const filteredProducts = DUMMY_PRODUCTS.filter((product) => {
+    const matchesCategory =
+      selectedCategory === "All" || product.category === selectedCategory;
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const categories = [
+    "All",
+    ...Array.from(new Set(DUMMY_PRODUCTS.map((p) => p.category))),
+  ];
+
+  const handleShopNow = () => {
+    const productsSection = document.getElementById("products");
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleViewCategories = () => {
+    const categoriesSection = document.getElementById("categories");
+    if (categoriesSection) {
+      categoriesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <>
+      <Hero
+        onShopNow={handleShopNow}
+        onViewCategories={handleViewCategories}
+      />
+      <Categories
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+      />
+      <ProductGrid products={filteredProducts} onAddToCart={onAddToCart} />
+    </>
+  );
+};
+
+// Protected route wrapper
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <>
+      <SignedIn>{children}</SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </>
+  );
+};
+
 function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState<string>("home");
 
   const addToCart = (product: Product) => {
     setCartItems((prevItems) => {
@@ -221,84 +281,67 @@ function App() {
     );
   };
 
-  const filteredProducts = DUMMY_PRODUCTS.filter((product) => {
-    const matchesCategory =
-      selectedCategory === "All" || product.category === selectedCategory;
-    const matchesSearch =
-      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-
-  const categories = [
-    "All",
-    ...Array.from(new Set(DUMMY_PRODUCTS.map((p) => p.category))),
-  ];
-
-  const handleShopNow = () => {
-    setCurrentPage("home");
-    const productsSection = document.getElementById("products");
-    if (productsSection) {
-      productsSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleViewCategories = () => {
-    setCurrentPage("home");
-    const categoriesSection = document.getElementById("categories");
-    if (categoriesSection) {
-      categoriesSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleNavigation = (page: string) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const renderCurrentPage = () => {
-    switch (currentPage) {
-      case "about":
-        return <About />;
-      case "contact":
-        return <Contact />;
-      default:
-        return (
-          <>
-            <Hero
-              onShopNow={handleShopNow}
-              onViewCategories={handleViewCategories}
-            />
-            <Categories
-              categories={categories}
-              selectedCategory={selectedCategory}
-              onCategoryChange={setSelectedCategory}
-            />
-            <ProductGrid products={filteredProducts} onAddToCart={addToCart} />
-          </>
-        );
-    }
-  };
-
   return (
     <Router>
       <CartProvider>
         <ChatProvider>
           <div className="min-h-screen bg-gray-50">
             <Toaster position="top-center" />
-            <Header
-              cartItemsCount={getCartItemsCount()}
-              onCartClick={() => setIsCartOpen(true)}
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-              onNavigate={handleNavigation}
-              currentPage={currentPage}
-            />
-
-            {renderCurrentPage()}
-
-            <Footer onNavigate={handleNavigation} />
+            
+            <Routes>
+              {/* Public routes */}
+              <Route path="/sign-in/*" element={<SignIn routing="path" path="/sign-in" />} />
+              <Route path="/sign-up/*" element={<SignUp routing="path" path="/sign-up" />} />
+              
+              {/* Protected routes */}
+              <Route path="/" element={
+                <ProtectedRoute>
+                  <Header
+                    cartItemsCount={getCartItemsCount()}
+                    onCartClick={() => setIsCartOpen(true)}
+                    searchQuery={""}
+                    onSearchChange={() => {}}
+                    onNavigate={() => {}}
+                    currentPage="home"
+                  />
+                  <HomePage onAddToCart={addToCart} />
+                  <Footer onNavigate={() => {}} />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/about" element={
+                <ProtectedRoute>
+                  <Header
+                    cartItemsCount={getCartItemsCount()}
+                    onCartClick={() => setIsCartOpen(true)}
+                    searchQuery={""}
+                    onSearchChange={() => {}}
+                    onNavigate={() => {}}
+                    currentPage="about"
+                  />
+                  <About />
+                  <Footer onNavigate={() => {}} />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/contact" element={
+                <ProtectedRoute>
+                  <Header
+                    cartItemsCount={getCartItemsCount()}
+                    onCartClick={() => setIsCartOpen(true)}
+                    searchQuery={""}
+                    onSearchChange={() => {}}
+                    onNavigate={() => {}}
+                    currentPage="contact"
+                  />
+                  <Contact />
+                  <Footer onNavigate={() => {}} />
+                </ProtectedRoute>
+              } />
+              
+              {/* Redirect any unknown routes to home */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
 
             <Cart
               isOpen={isCartOpen}

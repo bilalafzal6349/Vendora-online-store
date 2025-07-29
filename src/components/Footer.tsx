@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               onClick={() => handleNavClick("home")}
             >
               <div className=" transition-all duration-300">
-                <img src="/c.jpeg" className="w-[52px] h-[52px]" />
+                <img src="/mainLogo.jpeg" className="w-[52px] h-[52px]" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold group-hover:text-emerald-400 transition-colors capitalize">

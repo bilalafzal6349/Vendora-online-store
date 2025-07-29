@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Search, ShoppingBag, Menu, X } from "lucide-react";
+import { UserButton } from "@clerk/clerk-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface HeaderProps {
   cartItemsCount: number;
   onCartClick: () => void;
   searchQuery: string;
   onSearchChange: (query: string) => void;
-  onNavigate: (page: string) => void;
-  currentPage: string;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -15,32 +15,51 @@ const Header: React.FC<HeaderProps> = ({
   onCartClick,
   searchQuery,
   onSearchChange,
-  onNavigate,
-  currentPage,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
-    { id: "home", label: "Home" },
-    { id: "products", label: "Products" },
-    { id: "categories", label: "Categories" },
-    { id: "about", label: "About" },
-    { id: "contact", label: "Contact" },
+    { id: "home", label: "Home", path: "/" },
+    { id: "products", label: "Products", path: "/", scrollTo: "products" },
+    { id: "categories", label: "Categories", path: "/", scrollTo: "categories" },
+    { id: "about", label: "About", path: "/about" },
+    { id: "contact", label: "Contact", path: "/contact" },
   ];
 
-  const handleNavClick = (page: string) => {
-    if (page === "products" || page === "categories") {
-      onNavigate("home");
-      setTimeout(() => {
-        const element = document.getElementById(page);
+  const handleNavClick = (item: { id: string; path: string; scrollTo?: string }) => {
+    if (item.scrollTo) {
+      // If we need to scroll to a section on the home page
+      if (location.pathname !== "/") {
+        // Navigate to home first, then scroll
+        navigate("/");
+        setTimeout(() => {
+          const element = document.getElementById(item.scrollTo!);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } else {
+        // Already on home page, just scroll
+        const element = document.getElementById(item.scrollTo);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
-      }, 100);
+      }
     } else {
-      onNavigate(page);
+      // Navigate to the specified path
+      navigate(item.path);
     }
     setIsMobileMenuOpen(false);
+  };
+
+  // Determine if a nav item is currently active
+  const isActive = (path: string, scrollTo?: string) => {
+    if (scrollTo) {
+      return location.pathname === "/" && location.hash === `#${scrollTo}`;
+    }
+    return location.pathname === path;
   };
 
   return (
@@ -50,10 +69,10 @@ const Header: React.FC<HeaderProps> = ({
           {/* Logo */}
           <div
             className="flex items-center space-x-4 cursor-pointer group"
-            onClick={() => handleNavClick("home")}
+            onClick={() => navigate("/")}
           >
             <div className=" transition-all duration-300 transform  ">
-              <img src="/c.jpeg" className="h-12 w-12  " />
+              <img src="/mainLogo.jpeg" className="h-12 w-12  " />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors capitalize">
@@ -66,16 +85,15 @@ const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Navigation - Desktop */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-2">
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-emerald-50 ${
-                  currentPage === item.id ||
-                  (item.id === "home" && currentPage === "home")
+                onClick={() => handleNavClick(item)}
+                className={`font-medium transition-all duration-300 px-4 py-2 rounded-lg ${
+                  isActive(item.path, item.scrollTo)
                     ? "text-emerald-600 bg-emerald-50"
-                    : "text-gray-700 hover:text-emerald-600"
+                    : "text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
                 }`}
               >
                 {item.label}
@@ -121,6 +139,7 @@ const Header: React.FC<HeaderProps> = ({
                 <Menu className="h-6 w-6" />
               )}
             </button>
+            <UserButton />
           </div>
         </div>
 
@@ -145,10 +164,9 @@ const Header: React.FC<HeaderProps> = ({
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleNavClick(item.id)}
+                  onClick={() => handleNavClick(item)}
                   className={`text-left font-medium transition-all duration-300 px-4 py-3 rounded-lg ${
-                    currentPage === item.id ||
-                    (item.id === "home" && currentPage === "home")
+                    isActive(item.path, item.scrollTo)
                       ? "text-emerald-600 bg-emerald-50"
                       : "text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
                   }`}

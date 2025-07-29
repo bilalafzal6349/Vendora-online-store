@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_MAX_TOKENS: string;
   readonly VITE_TEMPERATURE: string;
   readonly VITE_MAX_REQUESTS_PER_MINUTE: string;
+  readonly VITE_CLERK_PUBLISHABLE_KEY: string;
   // Allow any other VITE_ environment variables
   readonly [key: string]: string | undefined;
 }
