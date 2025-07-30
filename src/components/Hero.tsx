@@ -82,16 +82,16 @@ const Hero: React.FC<HeroProps> = ({ onShopNow, onViewCategories }) => {
           {/* Hero Image */}
 
           <div className="relative animate-fadeInRight">
-            <div className="bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-600 rounded-3xl p-8 transform rotate-unset md:rotate-3 hover:rotate-0 transition-transform duration-700 shadow-2xl">
+            <div className=" rounded-lg  transition-transform duration-700 shadow-lg">
               <img
-                src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="/ve.jpeg"
                 alt="Shopping"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />
             </div>
 
             {/* Floating Cards */}
-            <div className="absolute -top-6 -left-6 bg-white p-2 md:p-6 rounded-2xl shadow-2xl animate-float ">
+            {/* <div className="absolute -top-6 -left-6 bg-white p-2 md:p-6 rounded-2xl shadow-2xl animate-float ">
               <div className="flex items-center space-x-3 ">
                 <ShoppingBag className="  h-3 w-3  md:h-8 md:w-8 text-emerald-600" />
                 <div>
@@ -103,9 +103,9 @@ const Hero: React.FC<HeroProps> = ({ onShopNow, onViewCategories }) => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            <div className="absolute -bottom-6 -right4 md:-right-6 bg-white p-2 md:p-6 rounded-2xl shadow-2xl animate-float-delayed">
+            {/* <div className="absolute -bottom-6 -right4 md:-right-6 bg-white p-2 md:p-6 rounded-2xl shadow-2xl animate-float-delayed">
               <div className="flex items-center space-x-3">
                 <div className=" w-2  h2 md:w-4 md:h-4 bg-green-500 rounded-full animate-pulse"></div>
                 <div>
@@ -117,7 +117,7 @@ const Hero: React.FC<HeroProps> = ({ onShopNow, onViewCategories }) => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

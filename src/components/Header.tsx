@@ -23,12 +23,21 @@ const Header: React.FC<HeaderProps> = ({
   const navItems = [
     { id: "home", label: "Home", path: "/" },
     { id: "products", label: "Products", path: "/", scrollTo: "products" },
-    { id: "categories", label: "Categories", path: "/", scrollTo: "categories" },
+    {
+      id: "categories",
+      label: "Categories",
+      path: "/",
+      scrollTo: "categories",
+    },
     { id: "about", label: "About", path: "/about" },
     { id: "contact", label: "Contact", path: "/contact" },
   ];
 
-  const handleNavClick = (item: { id: string; path: string; scrollTo?: string }) => {
+  const handleNavClick = (item: {
+    id: string;
+    path: string;
+    scrollTo?: string;
+  }) => {
     if (item.scrollTo) {
       // If we need to scroll to a section on the home page
       if (location.pathname !== "/") {
@@ -72,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({
             onClick={() => navigate("/")}
           >
             <div className=" transition-all duration-300 transform  ">
-              <img src="/mainLogo.jpeg" className="h-12 w-12  " />
+              <img src="/a.jpeg" className="h-12 w-12  " />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors capitalize">

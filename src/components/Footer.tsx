@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               onClick={() => handleNavClick("home")}
             >
               <div className=" transition-all duration-300">
-                <img src="/mainLogo.jpeg" className="w-[52px] h-[52px]" />
+                <img src="/a.jpeg" className="w-[52px] h-[52px]" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold group-hover:text-emerald-400 transition-colors capitalize">
@@ -177,7 +177,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <div className="flex items-center space-x-3 group">
                 <Phone className="h-5 w-5 text-emerald-400 group-hover:scale-110 transition-transform" />
                 <span className="text-gray-400 group-hover:text-white transition-colors">
-                  +92 300 123 4567
+                  +92 325 570 5107
                 </span>
               </div>
               <div className="flex items-center space-x-3 group">

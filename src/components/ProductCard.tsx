@@ -48,8 +48,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-2xl font-bold text-emerald-600">
-              ₹{product.price.toLocaleString()}
+            <span className="text-xl font-bold text-emerald-600">
+              {product.price.toLocaleString()}
+              <sub>Rs</sub>
             </span>
           </div>
 

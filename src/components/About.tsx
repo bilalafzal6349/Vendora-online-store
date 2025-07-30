@@ -9,7 +9,8 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              About <span className="text-emerald-600">Layyah OnlineStore</span>
+              About{" "}
+              <span className="text-emerald-600">Vendora OnlineStore</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Your trusted online shopping destination, bringing you the finest
@@ -26,7 +27,7 @@ const About: React.FC = () => {
                 </h2>
                 <p className="text-gray-600 leading-relaxed mb-4">
                   Founded with a vision to revolutionize online shopping in
-                  Pakistan, Layyah OnlineStore has grown from a small local
+                  Pakistan, Vendora OnlineStore has grown from a small local
                   business to a trusted e-commerce platform serving customers
                   nationwide.
                 </p>
@@ -41,7 +42,7 @@ const About: React.FC = () => {
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center p-6 bg-white rounded-xl shadow-lg">
                   <div className="text-3xl font-bold text-emerald-600 mb-2">
-                    10K+
+                    100K+
                   </div>
                   <div className="text-gray-600">Happy Customers</div>
                 </div>
@@ -56,7 +57,7 @@ const About: React.FC = () => {
 
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/3965545/pexels-photo-3965545.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="/aboutPic.jpeg"
                 alt="About Us"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />
@@ -140,7 +141,7 @@ const About: React.FC = () => {
                 Community Focus
               </h3>
               <p className="text-gray-600">
-                We're proud to be part of the Layyah community and committed to
+                We're proud to be part of the Vendora community and committed to
                 supporting local growth and development.
               </p>
             </div>

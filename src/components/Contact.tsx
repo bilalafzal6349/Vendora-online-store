@@ -73,7 +73,7 @@ Message: ${formData.message}`;
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-2">Phone</h3>
-                      <p className="text-gray-600">+92 300 123 4567</p>
+                      <p className="text-gray-600">+92 325 570 5107</p>
                       <p className="text-sm text-gray-500">
                         Available 24/7 for customer support
                       </p>
@@ -86,7 +86,7 @@ Message: ${formData.message}`;
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-2">Email</h3>
-                      <p className="text-gray-600">info@layyahstore.com</p>
+                      <p className="text-gray-600">info@VendoraStore.com</p>
                       <p className="text-sm text-gray-500">
                         We'll respond within 24 hours
                       </p>
@@ -99,7 +99,9 @@ Message: ${formData.message}`;
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-2">Address</h3>
-                      <p className="text-gray-600">Main Bazaar, Layyah</p>
+                      <p className="text-gray-600">
+                        Near Johar Town G1 Main Boluvard, Lahore
+                      </p>
                       <p className="text-gray-600">Punjab, Pakistan</p>
                     </div>
                   </div>

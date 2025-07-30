@@ -10,12 +10,23 @@ import WhatsAppButton from "././components/WhatsAppButton";
 import About from "././components/About";
 import Contact from "././components/Contact";
 import { CartItem, Product } from "././types";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./context/CartContext";
 import { ChatProvider } from "./context/ChatContext";
 import { ChatBot } from "./components/ChatBot";
-import { SignIn, SignUp, SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
+import {
+  SignIn,
+  SignUp,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+} from "@clerk/clerk-react";
 // import Checkout from "./pages/Checkout";
 
 const DUMMY_PRODUCTS: Product[] = [
@@ -177,7 +188,11 @@ const DUMMY_PRODUCTS: Product[] = [
 ];
 
 // Component for the main home page content
-const HomePage = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) => {
+const HomePage = ({
+  onAddToCart,
+}: {
+  onAddToCart: (product: Product) => void;
+}) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery] = useState("");
 
@@ -212,10 +227,7 @@ const HomePage = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) 
 
   return (
     <>
-      <Hero
-        onShopNow={handleShopNow}
-        onViewCategories={handleViewCategories}
-      />
+      <Hero onShopNow={handleShopNow} onViewCategories={handleViewCategories} />
       <Categories
         categories={categories}
         selectedCategory={selectedCategory}
@@ -287,58 +299,73 @@ function App() {
         <ChatProvider>
           <div className="min-h-screen bg-gray-50">
             <Toaster position="top-center" />
-            
+
             <Routes>
               {/* Public routes */}
-              <Route path="/sign-in/*" element={<SignIn routing="path" path="/sign-in" />} />
-              <Route path="/sign-up/*" element={<SignUp routing="path" path="/sign-up" />} />
-              
+              <Route
+                path="/sign-in/*"
+                element={<SignIn routing="path" path="/sign-in" />}
+              />
+              <Route
+                path="/sign-up/*"
+                element={<SignUp routing="path" path="/sign-up" />}
+              />
+
               {/* Protected routes */}
-              <Route path="/" element={
-                <ProtectedRoute>
-                  <Header
-                    cartItemsCount={getCartItemsCount()}
-                    onCartClick={() => setIsCartOpen(true)}
-                    searchQuery={""}
-                    onSearchChange={() => {}}
-                    onNavigate={() => {}}
-                    currentPage="home"
-                  />
-                  <HomePage onAddToCart={addToCart} />
-                  <Footer onNavigate={() => {}} />
-                </ProtectedRoute>
-              } />
-              
-              <Route path="/about" element={
-                <ProtectedRoute>
-                  <Header
-                    cartItemsCount={getCartItemsCount()}
-                    onCartClick={() => setIsCartOpen(true)}
-                    searchQuery={""}
-                    onSearchChange={() => {}}
-                    onNavigate={() => {}}
-                    currentPage="about"
-                  />
-                  <About />
-                  <Footer onNavigate={() => {}} />
-                </ProtectedRoute>
-              } />
-              
-              <Route path="/contact" element={
-                <ProtectedRoute>
-                  <Header
-                    cartItemsCount={getCartItemsCount()}
-                    onCartClick={() => setIsCartOpen(true)}
-                    searchQuery={""}
-                    onSearchChange={() => {}}
-                    onNavigate={() => {}}
-                    currentPage="contact"
-                  />
-                  <Contact />
-                  <Footer onNavigate={() => {}} />
-                </ProtectedRoute>
-              } />
-              
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Header
+                      cartItemsCount={getCartItemsCount()}
+                      onCartClick={() => setIsCartOpen(true)}
+                      searchQuery={""}
+                      onSearchChange={() => {}}
+                      onNavigate={() => {}}
+                      currentPage="home"
+                    />
+                    <HomePage onAddToCart={addToCart} />
+                    <Footer onNavigate={() => {}} />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/about"
+                element={
+                  <ProtectedRoute>
+                    <Header
+                      cartItemsCount={getCartItemsCount()}
+                      onCartClick={() => setIsCartOpen(true)}
+                      searchQuery={""}
+                      onSearchChange={() => {}}
+                      onNavigate={() => {}}
+                      currentPage="about"
+                    />
+                    <About />
+                    <Footer onNavigate={() => {}} />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/contact"
+                element={
+                  <ProtectedRoute>
+                    <Header
+                      cartItemsCount={getCartItemsCount()}
+                      onCartClick={() => setIsCartOpen(true)}
+                      searchQuery={""}
+                      onSearchChange={() => {}}
+                      onNavigate={() => {}}
+                      currentPage="contact"
+                    />
+                    <Contact />
+                    <Footer onNavigate={() => {}} />
+                  </ProtectedRoute>
+                }
+              />
+
               {/* Redirect any unknown routes to home */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
