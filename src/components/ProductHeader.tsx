@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import { UserButton } from "@clerk/clerk-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -10,7 +10,12 @@ interface HeaderProps {
   onSearchChange: (query: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
+const ProductHeader: React.FC<HeaderProps> = ({
+  cartItemsCount,
+  onCartClick,
+  searchQuery,
+  onSearchChange,
+}) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -111,7 +116,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
           </nav>
 
           {/* Search Bar - Desktop */}
-          {/* <div className="hidden md:flex items-center max-w-sm flex-1 mx-8">
+          <div className="hidden md:flex items-center max-w-sm flex-1 mx-8">
             <div className="relative w-full">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
@@ -122,7 +127,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                 className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white"
               />
             </div>
-          </div> */}
+          </div>
 
           {/* Cart and Menu */}
           <div className="flex items-center space-x-4">
@@ -153,7 +158,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
         </div>
 
         {/* Mobile Search */}
-        {/* <div className="md:hidden pb-4">
+        <div className="md:hidden pb-4">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
             <input
@@ -164,7 +169,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
               className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white"
             />
           </div>
-        </div> */}
+        </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
@@ -191,4 +196,4 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
   );
 };
 
-export default Header;
+export default ProductHeader;

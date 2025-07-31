@@ -1,5 +1,5 @@
 import React from "react";
-import { ShoppingBag, Truck, Shield, Headphones } from "lucide-react";
+import { Truck, Shield, Headphones } from "lucide-react";
 
 interface HeroProps {
   onShopNow: () => void;
@@ -100,20 +100,6 @@ const Hero: React.FC<HeroProps> = ({ onShopNow, onViewCategories }) => {
                   </p>
                   <p className=" text-[10px] md:text-sm text-gray-600">
                     Products
-                  </p>
-                </div>
-              </div>
-            </div> */}
-
-            {/* <div className="absolute -bottom-6 -right4 md:-right-6 bg-white p-2 md:p-6 rounded-2xl shadow-2xl animate-float-delayed">
-              <div className="flex items-center space-x-3">
-                <div className=" w-2  h2 md:w-4 md:h-4 bg-green-500 rounded-full animate-pulse"></div>
-                <div>
-                  <p className="font-bold text-gray-900 text-sm md:text-lg">
-                    Fast
-                  </p>
-                  <p className=" text-[10px] md:text-sm text-gray-600">
-                    Delivery
                   </p>
                 </div>
               </div>

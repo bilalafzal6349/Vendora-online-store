@@ -7,7 +7,7 @@ interface CategoriesProps {
   onCategoryChange: (category: string) => void;
 }
 
-const Categories: React.FC<CategoriesProps> = ({
+export const Categories: React.FC<CategoriesProps> = ({
   categories,
   selectedCategory,
   onCategoryChange,

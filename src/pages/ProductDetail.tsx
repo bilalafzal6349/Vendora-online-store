@@ -4,12 +4,13 @@ import { useCart } from "../context/CartContext";
 import { toast } from "react-hot-toast";
 
 interface Product {
-  id: string;
+  id: number;
   name: string;
   description: string;
   price: number;
   image: string;
   category: string;
+  quantity?: number;
 }
 
 const ProductDetail: React.FC = () => {

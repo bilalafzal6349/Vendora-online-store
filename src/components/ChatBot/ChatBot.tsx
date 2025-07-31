@@ -38,12 +38,12 @@ export const ChatBot = () => {
     try {
       const response = await chatService.sendMessage(userMessage);
       setTyping(false);
-      addMessage(response, "bot");
+      addMessage(response, "model");
     } catch (error) {
       setTyping(false);
       addMessage(
         "Sorry, I encountered an error. Please try again later.",
-        "bot"
+        "model"
       );
     } finally {
       setIsLoading(false);

@@ -15,6 +15,7 @@ export interface Product {
   reviewCount: number;
   image?: string;
   tags: string[];
+  featured?: boolean;
 }
 
 export interface Category {
@@ -102,6 +103,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 1250,
     tags: ["smartphone", "apple", "5G", "camera"],
+    featured: true,
   },
   {
     id: "e2",
@@ -115,6 +117,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 890,
     tags: ["laptop", "apple", "macbook", "m2"],
+    featured: true,
   },
   {
     id: "e3",
@@ -134,6 +137,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.7,
     reviewCount: 567,
     tags: ["headphones", "wireless", "noise canceling", "sony"],
+    featured: true,
   },
 
   // Fashion
@@ -154,6 +158,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.5,
     reviewCount: 320,
     tags: ["t-shirt", "casual", "cotton", "basic"],
+    featured: true,
   },
   {
     id: "f2",
@@ -186,6 +191,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.4,
     reviewCount: 456,
     tags: ["shoes", "running", "sports", "comfortable"],
+    featured: true,
   },
 
   // Books
@@ -201,6 +207,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 1234,
     tags: ["fiction", "classic", "literature", "american"],
+    featured: true,
   },
   {
     id: "b2",
@@ -267,6 +274,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 567,
     tags: ["lego", "building", "educational", "creative"],
+    featured: true,
   },
   {
     id: "t2",

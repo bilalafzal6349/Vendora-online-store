@@ -14,10 +14,10 @@ const WhatsAppButton: React.FC = () => {
   return (
     <button
       onClick={handleWhatsAppClick}
-      className="fixed bottom-6 right-6 hover:bg-green-100 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 z-40 animate-bounce"
+      className="fixed bottom-6 right-6 hover:bg-green-200 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 z-40 animate-bounce"
       title="Contact us on WhatsApp"
     >
-      <FaWhatsapp className="h-5 w-5 sm:h-6 sm:w-6 text-green-500" />
+      <FaWhatsapp className="h-5 w-5 sm:h-6 sm:w-6 text-green-500 " />
     </button>
   );
 };

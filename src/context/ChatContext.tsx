@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 export interface ChatMessage {
   id: string;
   content: string;
-  sender: "user" | "bot";
+  sender: "user" | "model";
   timestamp: Date;
 }
 
@@ -11,7 +11,7 @@ interface ChatContextType {
   messages: ChatMessage[];
   isOpen: boolean;
   isTyping: boolean;
-  addMessage: (content: string, sender: "user" | "bot") => void;
+  addMessage: (content: string, sender: "user" | "model") => void;
   toggleChat: () => void;
   setTyping: (typing: boolean) => void;
   clearMessages: () => void;
@@ -32,14 +32,14 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     {
       id: "1",
       content: "Hello! I'm your shopping assistant. How can I help you today?",
-      sender: "bot",
+      sender: "model",
       timestamp: new Date(),
     },
   ]);
   const [isOpen, setIsOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
 
-  const addMessage = (content: string, sender: "user" | "bot") => {
+  const addMessage = (content: string, sender: "user" | "model") => {
     const newMessage: ChatMessage = {
       id: Date.now().toString(),
       content,
@@ -63,7 +63,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         id: "1",
         content:
           "Hello! I'm your shopping assistant. How can I help you today?",
-        sender: "bot",
+        sender: "model",
         timestamp: new Date(),
       },
     ]);

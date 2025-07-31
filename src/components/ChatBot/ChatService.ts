@@ -2,7 +2,11 @@
 // Includes proper restrictions and security measures
 
 import { getActiveAPIConfig } from "../../config/api";
-import { PRODUCTS, CATEGORIES, getProductsOnSale } from "../../data/products";
+import {
+  PRODUCTS,
+  CATEGORIES,
+  getProductsOnSale,
+} from "../../constants/products";
 
 interface ChatServiceConfig {
   apiKey?: string;
@@ -13,6 +17,7 @@ interface ChatServiceConfig {
 
 interface GeminiRequest {
   contents: Array<{
+    role: string;
     parts: Array<{
       text: string;
     }>;
@@ -51,7 +56,6 @@ class ChatService {
     if (activeConfig.type === "gemini" && activeConfig.config) {
       this.config = {
         baseUrl: activeConfig.config.baseUrl,
-        maxTokens: activeConfig.config.maxTokens,
         temperature: activeConfig.config.temperature,
         apiKey: activeConfig.config.apiKey,
         ...config,
@@ -61,7 +65,6 @@ class ChatService {
       this.config = {
         baseUrl:
           "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
-        maxTokens: 150,
         temperature: 0.7,
         ...config,
       };
@@ -110,7 +113,7 @@ class ChatService {
   private getSystemPrompt(): string {
     const productData = this.getProductDataForPrompt();
 
-    return `You are a helpful shopping assistant for an e-commerce website called "Layyah Online Store". 
+    return `You are a helpful shopping assistant for an e-commerce website called "Vendora Online Store". 
 
 IMPORTANT RESTRICTIONS:
 - ONLY answer questions related to shopping, products, and e-commerce
@@ -212,6 +215,7 @@ If asked about anything outside these topics, politely redirect to shopping-rela
       const requestBody: GeminiRequest = {
         contents: [
           {
+            role: "user",
             parts: [
               {
                 text: this.getSystemPrompt(),
@@ -219,11 +223,11 @@ If asked about anything outside these topics, politely redirect to shopping-rela
             ],
           },
           ...this.conversationHistory.map((msg) => ({
+            role: msg.role,
             parts: [{ text: msg.content }],
           })),
         ],
         generationConfig: {
-          maxOutputTokens: this.config.maxTokens,
           temperature: this.config.temperature,
         },
         safetySettings: [

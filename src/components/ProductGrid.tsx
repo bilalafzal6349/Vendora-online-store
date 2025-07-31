@@ -7,7 +7,10 @@ interface ProductGridProps {
   onAddToCart: (product: Product) => void;
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
+export const ProductGrid: React.FC<ProductGridProps> = ({
+  products,
+  onAddToCart,
+}) => {
   return (
     <section id="products" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,5 +44,3 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
     </section>
   );
 };
-
-export default ProductGrid;
