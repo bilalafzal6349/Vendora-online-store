@@ -1,63 +1,55 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { Product } from "../types";
+import { ShoppingCart } from "lucide-react";
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
-  quantity?: number;
+import { DUMMY_PRODUCTS } from "../constants/home";
+
+interface ProductDetailProps {
+  onAddToCart: (product: Product) => void;
 }
 
-const ProductDetail: React.FC = () => {
+const ProductDetail: React.FC<ProductDetailProps> = ({ onAddToCart }) => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // In a real app, you would fetch the product data from your API
-  const product: Product = {
-    id: id || "1",
-    name: "Sample Product",
-    description:
-      "This is a sample product description. In a real application, this would be fetched from your backend.",
-    price: 999,
-    image: "https://via.placeholder.com/400",
-    category: "Sample Category",
-  };
+  useEffect(() => {
+    if (!id) return;
+
+    // Find the product from DUMMY_PRODUCTS using the ID
+    const foundProduct = DUMMY_PRODUCTS.find((p) => p.id === parseInt(id));
+
+    if (foundProduct) {
+      setProduct(foundProduct);
+    } else {
+      toast.error("Product not found");
+    }
+    setLoading(false);
+  }, [id]);
+
+  if (loading) return <div>Loading...</div>;
+  if (!product) return <div>Product not found.</div>;
 
   const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: quantity,
-      image: product.image,
-    });
-    toast.success("Added to cart!");
-  };
+    if (!product) return;
 
-  const handleBuyNow = () => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: quantity,
-      image: product.image,
-    });
-    navigate("/checkout");
+    // Add the product to cart multiple times based on quantity
+    for (let i = 0; i < quantity; i++) {
+      onAddToCart(product);
+    }
+
+    toast.success(`Added ${quantity} item(s) to cart!`);
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-24">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <img
-            src={product.image}
+            src={product.images[0]}
             alt={product.name}
             className="w-full h-96 object-cover rounded-lg shadow-md"
           />
@@ -71,7 +63,7 @@ const ProductDetail: React.FC = () => {
 
           <div className="mb-6">
             <span className="text-2xl font-bold text-gray-900">
-              Rs.{product.price}
+              Rs.{product.price * quantity}
             </span>
           </div>
 
@@ -99,16 +91,10 @@ const ProductDetail: React.FC = () => {
           <div className="flex space-x-4">
             <button
               onClick={handleAddToCart}
-              className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              className="bg-emerald-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-emerald-700 transition-all transform hover:scale-105 flex items-center space-x2 shadow-lg"
             >
-              Add to Cart
-            </button>
-
-            <button
-              onClick={handleBuyNow}
-              className="flex-1 px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700"
-            >
-              Buy Now
+              <ShoppingCart className="h-4 w-4" />
+              <span className="hidden sm:inline">Add to Cart</span>
             </button>
           </div>
 

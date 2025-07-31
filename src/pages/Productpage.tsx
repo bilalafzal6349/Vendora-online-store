@@ -3,7 +3,7 @@ import { Product } from "../types";
 import { Categories } from "../components/Categories";
 import { ProductGrid } from "../components/ProductGrid";
 import { DUMMY_PRODUCTS } from "../constants/home";
-const ProductPagexx = ({
+const ProductPage = ({
   onAddToCart,
   searchQuery,
 }: {
@@ -39,4 +39,4 @@ const ProductPagexx = ({
   );
 };
 
-export default ProductPagexx;
+export default ProductPage;

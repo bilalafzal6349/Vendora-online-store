@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Heart, Eye } from "lucide-react";
 import { Product } from "../types";
 
@@ -8,6 +9,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+  const navigate = useNavigate();
   return (
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group overflow-hidden">
       {/* Image Container */}
@@ -23,7 +25,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <button className="bg-white p-2 rounded-full shadow-lg hover:bg-emerald-50 transition-colors">
             <Heart className="h-5 w-5 text-gray-700 hover:text-emerald-600" />
           </button>
-          <button className="bg-white p-2 rounded-full shadow-lg hover:bg-emerald-50 transition-colors">
+          <button
+            className="bg-white p-2 rounded-full shadow-lg hover:bg-emerald-50 transition-colors"
+            onClick={() => navigate(`/product/${product.id}`)}
+          >
             <Eye className="h-5 w-5 text-gray-700 hover:text-emerald-600" />
           </button>
         </div>

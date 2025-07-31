@@ -57,15 +57,13 @@ Message: ${formData.message}`;
               help.
             </p>
           </div>
-
+          <h2 className="ml-2 text-3xl md:text-5xl font-bold text-gray-900 mb-8">
+            Contact Information
+          </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                  Contact Information
-                </h2>
-
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                     <div className="bg-emerald-100 p-3 rounded-lg">

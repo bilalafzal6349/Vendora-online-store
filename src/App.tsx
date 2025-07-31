@@ -16,6 +16,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Productpage from "./pages/Productpage";
+import ProductDetail from "./pages/ProductDetail";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./context/CartContext";
 import { ChatProvider } from "./context/ChatContext";
@@ -153,7 +154,22 @@ function App() {
                       onAddToCart={addToCart}
                       searchQuery={searchQuery}
                     />
-
+                    <Footer onNavigate={() => {}} />
+                  </ProtectedRoute>
+                }
+              />
+              {/* route for product detail */}
+              <Route
+                path="/product/:id"
+                element={
+                  <ProtectedRoute>
+                    <Header
+                      cartItemsCount={getCartItemsCount()}
+                      onCartClick={() => setIsCartOpen(true)}
+                      searchQuery={searchQuery}
+                      onSearchChange={setSearchQuery}
+                    />
+                    <ProductDetail onAddToCart={addToCart} />
                     <Footer onNavigate={() => {}} />
                   </ProtectedRoute>
                 }
