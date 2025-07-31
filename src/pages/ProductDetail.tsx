@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Product } from "../types";
 import { ShoppingCart } from "lucide-react";
-
+import {link} 
 import { DUMMY_PRODUCTS } from "../constants/home";
 
 interface ProductDetailProps {
@@ -99,9 +99,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ onAddToCart }) => {
           </div>
 
           <div className="mt-8">
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">
+            <Link className="text-lg font-semibold text-gray-900 mb-2">
               Product Details
-            </h2>
+            </Link>
             <ul className="list-disc list-inside text-gray-600 space-y-2">
               <li>Category: {product.category}</li>
               <li>Free shipping on orders above Rs.2000</li>

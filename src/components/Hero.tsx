@@ -35,14 +35,14 @@ const Hero: React.FC<HeroProps> = ({ onShopNow, onViewCategories }) => {
                 onClick={onShopNow}
                 className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-10 py-4 rounded-xl font-semibold hover:from-emerald-700 hover:to-emerald-800 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
               >
-                Shop Now
+                View Products
               </button>
-              <button
+              {/* <button
                 onClick={onViewCategories}
                 className="border-2 border-emerald-600 text-emerald-600 px-10 py-4 rounded-xl font-semibold hover:bg-emerald-600 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 View Categories
-              </button>
+              </button> */}
             </div>
 
             {/* Features */}

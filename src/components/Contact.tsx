@@ -36,7 +36,7 @@ Message: ${formData.message}`;
   const handleWhatsAppClick = () => {
     const message =
       "Hi! I'd like to get in touch with you regarding your products and services.";
-    const whatsappUrl = `https://wa.me/923001234567?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/923255705107?text=${encodeURIComponent(
       message
     )}`;
     window.open(whatsappUrl, "_blank");
