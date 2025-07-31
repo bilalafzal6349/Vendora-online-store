@@ -90,7 +90,7 @@ const Hero: React.FC<HeroProps> = ({ onShopNow }) => {
           <div className="relative animate-fadeInRight">
             <div className=" rounded-lg  transition-transform duration-700 shadow-lg">
               <img
-                src="/ve.jpeg"
+                src="/heroImage.png"
                 alt="Shopping"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />

@@ -81,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
             onClick={() => navigate("/")}
           >
             <div className=" transition-all duration-300 transform  ">
-              <img src="/a.jpeg" className="h-12 w-12  " />
+              <img src="/logo.jpeg" className="h-12 w-12  " />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors capitalize">

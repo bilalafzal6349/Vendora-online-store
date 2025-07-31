@@ -7,7 +7,7 @@ interface ChatMessageProps {
 }
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
-  const isBot = message.sender === "user";
+  const isBot = message.sender === "model";
 
   return (
     <div className={`flex ${isBot ? "justify-start" : "justify-end"} mb-4`}>

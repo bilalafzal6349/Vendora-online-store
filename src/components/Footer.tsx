@@ -23,19 +23,19 @@ const Footer: React.FC = () => {
     } else if (page === "contact") {
       navigate("/contact");
     }
-    
+
     // Smooth scroll to top after navigation
     setTimeout(() => {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }, 100);
   };
 
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 pt-16 pb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-6">
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
               onClick={() => handleNavClick("home")}
             >
               <div className=" transition-all duration-300">
-                <img src="/a.jpeg" className="w-[52px] h-[52px]" />
+                <img src="/logo.jpeg" className="w-[52px] h-[52px]" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold group-hover:text-emerald-400 transition-colors capitalize">
