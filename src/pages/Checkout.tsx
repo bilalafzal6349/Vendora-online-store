@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { toast } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 interface FormData {
   name: string;
@@ -122,167 +123,177 @@ const Checkout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+    >
+      <div className="min-h-screen bg-gray-100 py-8">
+        <div className="max-w-4xl mx-auto px-4">
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
 
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-          <div className="space-y-4">
-            {cart.map((item) => (
-              <div key={item.id} className="flex justify-between items-center">
-                <span>
-                  {item.name} x {item.quantity}
-                </span>
-                <span>Rs.{item.price * item.quantity}</span>
-              </div>
-            ))}
-            <div className="border-t pt-4">
-              <div className="flex justify-between mb-2">
-                <span>Subtotal</span>
-                <span>Rs.{total}</span>
-              </div>
-              <div className="flex justify-between mb-2">
-                <span>Shipping Charges</span>
-                <span>Rs.{SHIPPING_CHARGES}</span>
-              </div>
-              <div className="flex justify-between font-bold text-lg">
-                <span>Total</span>
-                <span>Rs.{total + SHIPPING_CHARGES}</span>
+          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+            <div className="space-y-4">
+              {cart.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex justify-between items-center"
+                >
+                  <span>
+                    {item.name} x {item.quantity}
+                  </span>
+                  <span>Rs.{item.price * item.quantity}</span>
+                </div>
+              ))}
+              <div className="border-t pt-4">
+                <div className="flex justify-between mb-2">
+                  <span>Subtotal</span>
+                  <span>Rs.{total}</span>
+                </div>
+                <div className="flex justify-between mb-2">
+                  <span>Shipping Charges</span>
+                  <span>Rs.{SHIPPING_CHARGES}</span>
+                </div>
+                <div className="flex justify-between font-bold text-lg">
+                  <span>Total</span>
+                  <span>Rs.{total + SHIPPING_CHARGES}</span>
+                </div>
               </div>
             </div>
           </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white rounded-lg shadow-md p-6"
+          >
+            <h2 className="text-xl font-semibold mb-6">Shipping Information</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-2 border rounded-md ${
+                    errors.name ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+                {errors.name && (
+                  <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-2 border rounded-md ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-2 border rounded-md ${
+                    errors.phone ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+                {errors.phone && (
+                  <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  City *
+                </label>
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-2 border rounded-md ${
+                    errors.city ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+                {errors.city && (
+                  <p className="mt-1 text-sm text-red-500">{errors.city}</p>
+                )}
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Address *
+                </label>
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-2 border rounded-md ${
+                    errors.address ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+                {errors.address && (
+                  <p className="mt-1 text-sm text-red-500">{errors.address}</p>
+                )}
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Order Notes
+                </label>
+                <textarea
+                  name="notes"
+                  value={formData.notes}
+                  onChange={handleInputChange}
+                  rows={3}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                />
+              </div>
+            </div>
+
+            <div className="mt-8 flex justify-end space-x-4">
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+              >
+                Back
+              </button>
+              <button
+                type="submit"
+                className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+              >
+                Place Order
+              </button>
+            </div>
+          </form>
         </div>
-
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white rounded-lg shadow-md p-6"
-        >
-          <h2 className="text-xl font-semibold mb-6">Shipping Information</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-2 border rounded-md ${
-                  errors.name ? "border-red-500" : "border-gray-300"
-                }`}
-              />
-              {errors.name && (
-                <p className="mt-1 text-sm text-red-500">{errors.name}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email *
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-2 border rounded-md ${
-                  errors.email ? "border-red-500" : "border-gray-300"
-                }`}
-              />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Phone Number *
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-2 border rounded-md ${
-                  errors.phone ? "border-red-500" : "border-gray-300"
-                }`}
-              />
-              {errors.phone && (
-                <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                City *
-              </label>
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-2 border rounded-md ${
-                  errors.city ? "border-red-500" : "border-gray-300"
-                }`}
-              />
-              {errors.city && (
-                <p className="mt-1 text-sm text-red-500">{errors.city}</p>
-              )}
-            </div>
-
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Address *
-              </label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-2 border rounded-md ${
-                  errors.address ? "border-red-500" : "border-gray-300"
-                }`}
-              />
-              {errors.address && (
-                <p className="mt-1 text-sm text-red-500">{errors.address}</p>
-              )}
-            </div>
-
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Order Notes
-              </label>
-              <textarea
-                name="notes"
-                value={formData.notes}
-                onChange={handleInputChange}
-                rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md"
-              />
-            </div>
-          </div>
-
-          <div className="mt-8 flex justify-end space-x-4">
-            <button
-              type="button"
-              onClick={() => navigate(-1)}
-              className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-            >
-              Back
-            </button>
-            <button
-              type="submit"
-              className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-            >
-              Place Order
-            </button>
-          </div>
-        </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

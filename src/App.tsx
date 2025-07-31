@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Header from "././components/Header";
-import Hero from "././components/Hero";
+import Home from "././pages/Home";
 import ProductHeader from "././components/ProductHeader";
 import Cart from "././components/Cart";
 import Footer from "././components/Footer";
@@ -14,6 +14,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import Productpage from "./pages/Productpage";
 import ProductDetail from "./pages/ProductDetail";
@@ -28,28 +29,9 @@ import {
   SignedOut,
   RedirectToSignIn,
 } from "@clerk/clerk-react";
+import { AnimatePresence } from "framer-motion";
+
 // Component for the main home page content
-const HomePage = () => {
-  const handleShopNow = () => {
-    const productsSection = document.getElementById("products");
-    if (productsSection) {
-      productsSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleViewCategories = () => {
-    const categoriesSection = document.getElementById("categories");
-    if (categoriesSection) {
-      categoriesSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  return (
-    <div>
-      <Hero onShopNow={handleShopNow} onViewCategories={handleViewCategories} />
-    </div>
-  );
-};
 
 // Protected route wrapper
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -63,10 +45,12 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-function App() {
+// AppContent: uses useLocation and AnimatePresence
+function AppContent() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const location = useLocation();
 
   const addToCart = (product: Product) => {
     setCartItems((prevItems) => {
@@ -108,118 +92,127 @@ function App() {
   };
 
   return (
+    <div className="min-h-screen bg-gray-50">
+      <Toaster position="top-center" />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          {/* Public routes */}
+          <Route
+            path="/sign-in/*"
+            element={<SignIn routing="path" path="/sign-in" />}
+          />
+          <Route
+            path="/sign-up/*"
+            element={<SignUp routing="path" path="/sign-up" />}
+          />
+          {/* Protected routes */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Header
+                  cartItemsCount={getCartItemsCount()}
+                  onCartClick={() => setIsCartOpen(true)}
+                  searchQuery={searchQuery}
+                  onSearchChange={setSearchQuery}
+                />
+                <Home />
+                <Footer onNavigate={() => {}} />
+              </ProtectedRoute>
+            }
+          />
+          {/* route for products */}
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <ProductHeader
+                  cartItemsCount={getCartItemsCount()}
+                  onCartClick={() => setIsCartOpen(true)}
+                  searchQuery={searchQuery}
+                  onSearchChange={setSearchQuery}
+                />
+                <Productpage
+                  onAddToCart={addToCart}
+                  searchQuery={searchQuery}
+                />
+                <Footer onNavigate={() => {}} />
+              </ProtectedRoute>
+            }
+          />
+          {/* route for product detail */}
+          <Route
+            path="/product/:id"
+            element={
+              <ProtectedRoute>
+                <Header
+                  cartItemsCount={getCartItemsCount()}
+                  onCartClick={() => setIsCartOpen(true)}
+                  searchQuery={searchQuery}
+                  onSearchChange={setSearchQuery}
+                />
+                <ProductDetail onAddToCart={addToCart} />
+                <Footer onNavigate={() => {}} />
+              </ProtectedRoute>
+            }
+          />
+          {/* route for about page */}
+          <Route
+            path="/about"
+            element={
+              <ProtectedRoute>
+                <Header
+                  cartItemsCount={getCartItemsCount()}
+                  onCartClick={() => setIsCartOpen(true)}
+                  searchQuery={searchQuery}
+                  onSearchChange={setSearchQuery}
+                />
+                <About />
+                <Footer onNavigate={() => {}} />
+              </ProtectedRoute>
+            }
+          />
+          {/* route for contact page */}
+          <Route
+            path="/contact"
+            element={
+              <ProtectedRoute>
+                <Header
+                  cartItemsCount={getCartItemsCount()}
+                  onCartClick={() => setIsCartOpen(true)}
+                  searchQuery={searchQuery}
+                  onSearchChange={setSearchQuery}
+                />
+                <Contact />
+                <Footer onNavigate={() => {}} />
+              </ProtectedRoute>
+            }
+          />
+          {/* Redirect any unknown routes to home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AnimatePresence>
+      <Cart
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        items={cartItems}
+        onUpdateQuantity={updateQuantity}
+        onRemoveItem={removeFromCart}
+        total={getCartTotal()}
+      />
+      <WhatsAppButton />
+      <ChatBot />
+    </div>
+  );
+}
+
+// Main App: only wraps providers and Router
+function App() {
+  return (
     <Router>
       <CartProvider>
         <ChatProvider>
-          <div className="min-h-screen bg-gray-50">
-            <Toaster position="top-center" />
-            <Routes>
-              {/* Public routes */}
-              <Route
-                path="/sign-in/*"
-                element={<SignIn routing="path" path="/sign-in" />}
-              />
-              <Route
-                path="/sign-up/*"
-                element={<SignUp routing="path" path="/sign-up" />}
-              />
-              {/* Protected routes */}
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <Header
-                      cartItemsCount={getCartItemsCount()}
-                      onCartClick={() => setIsCartOpen(true)}
-                      searchQuery={searchQuery}
-                      onSearchChange={setSearchQuery}
-                    />
-                    <HomePage />
-                    <Footer onNavigate={() => {}} />
-                  </ProtectedRoute>
-                }
-              />
-              {/* route for products */}
-              <Route
-                path="/products"
-                element={
-                  <ProtectedRoute>
-                    <ProductHeader
-                      cartItemsCount={getCartItemsCount()}
-                      onCartClick={() => setIsCartOpen(true)}
-                      searchQuery={searchQuery}
-                      onSearchChange={setSearchQuery}
-                    />
-                    <Productpage
-                      onAddToCart={addToCart}
-                      searchQuery={searchQuery}
-                    />
-                    <Footer onNavigate={() => {}} />
-                  </ProtectedRoute>
-                }
-              />
-              {/* route for product detail */}
-              <Route
-                path="/product/:id"
-                element={
-                  <ProtectedRoute>
-                    <Header
-                      cartItemsCount={getCartItemsCount()}
-                      onCartClick={() => setIsCartOpen(true)}
-                      searchQuery={searchQuery}
-                      onSearchChange={setSearchQuery}
-                    />
-                    <ProductDetail onAddToCart={addToCart} />
-                    <Footer onNavigate={() => {}} />
-                  </ProtectedRoute>
-                }
-              />
-              {/* route for about page */}
-              <Route
-                path="/about"
-                element={
-                  <ProtectedRoute>
-                    <Header
-                      cartItemsCount={getCartItemsCount()}
-                      onCartClick={() => setIsCartOpen(true)}
-                      searchQuery={searchQuery}
-                      onSearchChange={setSearchQuery}
-                    />
-                    <About />
-                    <Footer onNavigate={() => {}} />
-                  </ProtectedRoute>
-                }
-              />
-              {/* route for contact page */}
-              <Route
-                path="/contact"
-                element={
-                  <ProtectedRoute>
-                    <Header
-                      cartItemsCount={getCartItemsCount()}
-                      onCartClick={() => setIsCartOpen(true)}
-                      searchQuery={searchQuery}
-                      onSearchChange={setSearchQuery}
-                    />
-                    <Contact />
-                    <Footer onNavigate={() => {}} />
-                  </ProtectedRoute>
-                }
-              />
-              {/* Redirect any unknown routes to home */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-            <Cart
-              isOpen={isCartOpen}
-              onClose={() => setIsCartOpen(false)}
-              items={cartItems}
-              onUpdateQuantity={updateQuantity}
-              onRemoveItem={removeFromCart}
-              total={getCartTotal()}
-            />
-            <WhatsAppButton />
-            <ChatBot />
-          </div>
+          <AppContent />
         </ChatProvider>
       </CartProvider>
     </Router>

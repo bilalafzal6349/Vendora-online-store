@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 interface Product {
   id: string;
@@ -57,34 +58,41 @@ const Products: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Our Products</h1>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+    >
+      <div className="max-w-7xl mx-auto px-4">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Our Products</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <Link
-            key={product.id}
-            to={`/products/${product.id}`}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-          >
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-2">
-                {product.name}
-              </h2>
-              <p className="text-gray-600 mb-2">{product.category}</p>
-              <p className="text-xl font-bold text-gray-900">
-                Rs.{product.price}
-              </p>
-            </div>
-          </Link>
-        ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
+            <Link
+              key={product.id}
+              to={`/products/${product.id}`}
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">
+                  {product.name}
+                </h2>
+                <p className="text-gray-600 mb-2">{product.category}</p>
+                <p className="text-xl font-bold text-gray-900">
+                  Rs.{product.price}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

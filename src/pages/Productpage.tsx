@@ -3,6 +3,7 @@ import { Product } from "../types";
 import { Categories } from "../components/Categories";
 import { ProductGrid } from "../components/ProductGrid";
 import { DUMMY_PRODUCTS } from "../constants/home";
+import { motion } from "framer-motion";
 const ProductPage = ({
   onAddToCart,
   searchQuery,
@@ -28,14 +29,19 @@ const ProductPage = ({
   ];
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       <Categories
         categories={categories}
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
       />
       <ProductGrid products={filteredProducts} onAddToCart={onAddToCart} />
-    </>
+    </motion.div>
   );
 };
 
