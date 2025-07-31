@@ -28,7 +28,7 @@ Subject: ${formData.subject}
 
 Message: ${formData.message}`;
 
-    const whatsappUrl = `https://wa.me/923001234567?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/923255705107?text=${encodeURIComponent(
       whatsappMessage
     )}`;
     window.open(whatsappUrl, "_blank");

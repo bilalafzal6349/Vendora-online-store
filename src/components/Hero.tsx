@@ -1,5 +1,6 @@
 import React from "react";
 import { Truck, Shield, Headphones } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   onShopNow: () => void;
@@ -30,12 +31,24 @@ const Hero: React.FC<HeroProps> = ({ onShopNow }) => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6">
-              <button
+              <motion.button
                 onClick={onShopNow}
-                className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-10 py-4 rounded-xl font-semibold hover:from-emerald-700 hover:to-emerald-800 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+                className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-10 py-4 rounded-xl font-semibold hover:from-emerald-700 hover:to-emerald-800 shadow-xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{
+                  scale: 0.95,
+                  transition: { duration: 0.08 },
+                }}
               >
                 View Products
-              </button>
+              </motion.button>
             </div>
 
             {/* Features */}

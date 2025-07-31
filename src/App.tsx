@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Header from "././components/Header";
-import Home from "././pages/Home";
+import { HomePage } from "./pages/HomePage";
 import ProductHeader from "././components/ProductHeader";
 import Cart from "././components/Cart";
 import Footer from "././components/Footer";
@@ -116,8 +116,8 @@ function AppContent() {
                   searchQuery={searchQuery}
                   onSearchChange={setSearchQuery}
                 />
-                <Home />
-                <Footer onNavigate={() => {}} />
+                <HomePage />
+                <Footer />
               </ProtectedRoute>
             }
           />
@@ -136,7 +136,7 @@ function AppContent() {
                   onAddToCart={addToCart}
                   searchQuery={searchQuery}
                 />
-                <Footer onNavigate={() => {}} />
+                <Footer />
               </ProtectedRoute>
             }
           />
@@ -152,7 +152,7 @@ function AppContent() {
                   onSearchChange={setSearchQuery}
                 />
                 <ProductDetail onAddToCart={addToCart} />
-                <Footer onNavigate={() => {}} />
+                <Footer />
               </ProtectedRoute>
             }
           />
@@ -168,7 +168,7 @@ function AppContent() {
                   onSearchChange={setSearchQuery}
                 />
                 <About />
-                <Footer onNavigate={() => {}} />
+                <Footer />
               </ProtectedRoute>
             }
           />
@@ -184,11 +184,12 @@ function AppContent() {
                   onSearchChange={setSearchQuery}
                 />
                 <Contact />
-                <Footer onNavigate={() => {}} />
+                <Footer />
               </ProtectedRoute>
             }
           />
           {/* Redirect any unknown routes to home */}
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>

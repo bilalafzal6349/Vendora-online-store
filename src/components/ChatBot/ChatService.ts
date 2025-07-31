@@ -56,7 +56,7 @@ class ChatService {
     if (activeConfig.type === "gemini" && activeConfig.config) {
       this.config = {
         baseUrl: activeConfig.config.baseUrl,
-        temperature: activeConfig.config.temperature,
+        // temperature: activeConfig.config.temperature,
         apiKey: activeConfig.config.apiKey,
         ...config,
       };

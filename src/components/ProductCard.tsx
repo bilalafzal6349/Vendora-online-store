@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ShoppingCart, Heart, Eye } from "lucide-react";
+import { ShoppingCart, Eye } from "lucide-react";
 import { Product } from "../types";
 import { motion } from "framer-motion";
 
@@ -29,9 +29,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
           {/* Overlay Actions */}
           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center space-x-3 opacity-0 group-hover:opacity-100">
-            <button className="bg-white p-2 rounded-full shadow-lg hover:bg-emerald-50 transition-colors">
-              <Heart className="h-5 w-5 text-gray-700 hover:text-emerald-600" />
-            </button>
             <button
               className="bg-white p-2 rounded-full shadow-lg hover:bg-emerald-50 transition-colors"
               onClick={() => navigate(`/product/${product.id}`)}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Phone,
   Mail,
@@ -8,23 +9,28 @@ import {
   Twitter,
 } from "lucide-react";
 
-interface FooterProps {
-  onNavigate: (page: string) => void;
-}
+const Footer: React.FC = () => {
+  const navigate = useNavigate();
 
-const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const handleNavClick = (page: string) => {
-    if (page === "products" || page === "categories") {
-      onNavigate("home");
-      setTimeout(() => {
-        const element = document.getElementById(page);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    } else {
-      onNavigate(page);
+    // Navigate to the page
+    if (page === "home") {
+      navigate("/");
+    } else if (page === "products") {
+      navigate("/products");
+    } else if (page === "about") {
+      navigate("/about");
+    } else if (page === "contact") {
+      navigate("/contact");
     }
+    
+    // Smooth scroll to top after navigation
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
   };
 
   return (
@@ -94,14 +100,6 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   className="text-gray-400 hover:text-emerald-400 transition-colors hover:translate-x-1 transform duration-300"
                 >
                   Products
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNavClick("categories")}
-                  className="text-gray-400 hover:text-emerald-400 transition-colors hover:translate-x-1 transform duration-300"
-                >
-                  Categories
                 </button>
               </li>
               <li>
